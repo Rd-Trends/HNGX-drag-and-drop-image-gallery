@@ -33,7 +33,9 @@ const HomeContainer = ({ user }: { user?: User }) => {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setItems(() => {
-      return images.filter((item) => item.tag.includes(e.target.value));
+      return images.filter((item) =>
+        item.tag.toLowerCase().includes(e.target.value.toLowerCase())
+      );
     });
   };
 
