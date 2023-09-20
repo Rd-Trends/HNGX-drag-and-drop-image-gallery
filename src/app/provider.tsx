@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { HTML5toTouch } from "rdndmb-html5-to-touch";
-import { DndProvider } from "react-dnd-multi-backend";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
-  return <DndProvider options={HTML5toTouch}>{children}</DndProvider>;
+  return <DndProvider backend={HTML5Backend}>{children}</DndProvider>;
 };
 
 export default Provider;
