@@ -16,14 +16,14 @@
 - [Nextjs](https://nextjs.org/)
 - [Typescript](https://www.typescriptlang.org)
 - [TailwindCSS](https://tailwindcss.com/)
-- [React-dnd - for drag and drrop](https://react-dnd.github.io/react-dnd/about)
+- [React-dnd - for drag and drop](https://react-dnd.github.io/react-dnd/about)
 - [Supabase - for database and auth](https://supabase.com/)
   
 ## Features
 
 <!-- List the features of your application or follow the template. Don't share the figma file here :) -->
 
-This application/site was created as a submission to a HNGX frontend track stage three task. The task was to build an application to complete the given user stories.
+This application/site was created as a submission to HNGX frontend track stage three task. The task was to build an application to complete the given user stories.
 
 - User can drag and drop images to reposition them
 - User can search for images
@@ -37,7 +37,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 $ git clone https://github.com/Rd-Trends/HNGX-drag-and-drop-image-gallery.git
 ```
 
-create a .env.local file in your root directory and add the following environment variable
+create a .env.local file in your root directory and add the following environment variables,
 visit [Supabase](https://supabase.com) to create an account and get your url and anon key for a specific project
 
 ```env

@@ -28,7 +28,7 @@ const HomeContainer = ({ user }: { user?: User }) => {
         return clonedCards;
       });
     },
-    [items]
+    []
   );
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {

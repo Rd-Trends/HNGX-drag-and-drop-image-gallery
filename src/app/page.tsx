@@ -4,7 +4,9 @@ import Provider from "./provider";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
-const Home = async () => {
+export const dynamic = "force-dynamic";
+
+async function Home() {
   const supabase = createServerComponentClient({
     cookies,
   });
@@ -19,6 +21,6 @@ const Home = async () => {
       </Provider>
     </div>
   );
-};
+}
 
 export default Home;
