@@ -12,9 +12,10 @@ export async function getUserSession({
   email: string;
   password: string;
 }) {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
-  const supabase = createClient(supabaseUrl, supabaseKey);
+//   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
+//   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
+  //   const supabase = createClient(supabaseUrl, supabaseKey);
+  const supabase = createClientComponentClient();
 
   // Create a session for the user if it doesn't exist already.
   // You can then log in as any number of test users from your tests.
@@ -24,5 +25,5 @@ export async function getUserSession({
     password,
   });
 
-  return { session: res.data.session as Session, supabaseUrl, supabaseKey };
+  return { session: res.data.session as Session};
 }

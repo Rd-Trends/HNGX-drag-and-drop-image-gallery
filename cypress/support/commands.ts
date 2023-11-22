@@ -12,9 +12,8 @@ Cypress.Commands.add("loginCustomer", () => {
     email,
     password,
     // @ts-ignore
-  }).then(({ session, supabaseUrl, supabaseKey }) => {
+  }).then(({ session }) => {
     cy.setCookie(cokieName, JSON.stringify(session));
-    cy.log(supabaseUrl);
     cy.visit("/");
   });
 
