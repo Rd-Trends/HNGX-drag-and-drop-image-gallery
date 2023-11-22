@@ -1,0 +1,75 @@
+name: Cypress test
+
+on: push
+
+jobs:
+  install:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress install
+        uses: cypress-io/github-action@v6
+        with:
+          runTests: false
+      # report machine parameters
+      - run: yarn cypress info
+      - run: yarn build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{secrets.NEXT_PUBLIC_SUPABASE_URL}}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY}}
+          CYPRESS_NEXT_PUBLIC_SUPABASE_URL: ${{secrets.CYPRESS_NEXT_PUBLIC_SUPABASE_URL}}
+          CYPRESS_NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{secrets.CYPRESS_NEXT_PUBLIC_SUPABASE_ANON_KEY}}
+          CYPRESS_SUPABASE_SERVICE_KEY: ${{secrets.CYPRESS_SUPABASE_SERVICE_KEY}}
+          CYPRESS_PUBLIC_SUPABASE_ADMIN_USER_ID: ${{secrets.CYPRESS_PUBLIC_SUPABASE_ADMIN_USER_ID}}
+          CYPRESS_TEST_SUPABASE_PROJECT_ID: ${{secrets.CYPRESS_TEST_SUPABASE_PROJECT_ID}}
+          CYPRESS_TEST_USER_EMAIL: ${{secrets.CYPRESS_TEST_USER_EMAIL}}
+          CYPRESS_TEST_USER_PASSWORD: ${{secrets.CYPRESS_TEST_USER_PASSWORD}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Save build folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          if-no-files-found: error
+          path: .next
+
+  e2e:
+    runs-on: ubuntu-22.04
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download the build folder
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: .next
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          config: baseUrl=http://localhost:3000
+          start: yarn start
+          browser: chrome
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{secrets.NEXT_PUBLIC_SUPABASE_URL}}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY}}
+          CYPRESS_NEXT_PUBLIC_SUPABASE_URL: ${{secrets.NEXT_PUBLIC_SUPABASE_URL}}
+          CYPRESS_NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY}}
+          CYPRESS_SUPABASE_SERVICE_KEY: ${{secrets.SUPABASE_SERVICE_KEY}}
+          CYPRESS_PUBLIC_SUPABASE_ADMIN_USER_ID: ${{secrets.PUBLIC_SUPABASE_ADMIN_USER_ID}}
+          CYPRESS_TEST_SUPABASE_PROJECT_ID: ${{secrets.TEST_SUPABASE_PROJECT_ID}}
+          CYPRESS_TEST_USER_EMAIL: ${{secrets.TEST_USER_EMAIL}}
+          CYPRESS_TEST_USER_PASSWORD: ${{secrets.TEST_USER_PASSWORD}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots

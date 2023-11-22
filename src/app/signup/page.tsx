@@ -79,6 +79,7 @@ export default function Login() {
                   {...register("password")}
                 />
                 <button
+                  type="button"
                   className="absolute right-4 t--1/2 translate--y-1/2 outline-none bg-transparent h-full"
                   onClick={(e) => {
                     e.preventDefault();
@@ -94,7 +95,9 @@ export default function Login() {
                 {errors.password.message}
               </p>
             )}
-            <button className="mt-8 w-full py-2 flex items-center justify-center px-4 text-white rounded-md shadow-[0px_1px_6px_rgba(0,0,0,0.1)] bg-blue-500 border-none outline-none hover:opacity-70 focus:opacity-70">
+            <button
+              type="submit"
+              className="mt-8 w-full py-2 flex items-center justify-center px-4 text-white rounded-md shadow-[0px_1px_6px_rgba(0,0,0,0.1)] bg-blue-500 border-none outline-none hover:opacity-70 focus:opacity-70">
               {!isLoading ? (
                 "Sign Up"
               ) : (
