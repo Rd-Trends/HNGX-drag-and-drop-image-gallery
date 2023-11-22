@@ -54,6 +54,7 @@ export default function Login() {
               <span>email</span>
               <input
                 // type="email"
+                data-testid="login-email"
                 placeholder="johnDoe@gmail.com"
                 className="w-full border border-gray-400 rounded-md py-2 px-4 mt-1 hover:border-blue-500 focus:border-2 focus:border-blue-500 outline-none border-secondary bg-transparent hover:focus:border-primary"
                 {...register("email")}
@@ -69,6 +70,7 @@ export default function Login() {
               <span>password</span>
               <div className=" relative flex items-center">
                 <input
+                  data-testid="login-password"
                   type={showPassword ? "text" : "password"}
                   id="password"
                   placeholder="********"
@@ -92,7 +94,10 @@ export default function Login() {
                 {errors.password.message}
               </p>
             )}
-            <button type="submit" className="mt-8 w-full py-2 flex items-center justify-center px-4 text-white rounded-md shadow-[0px_1px_6px_rgba(0,0,0,0.1)] bg-blue-500 border-none outline-none hover:opacity-70 focus:opacity-70">
+            <button
+              data-testid="login-submit"
+              type="submit"
+              className="mt-8 w-full py-2 flex items-center justify-center px-4 text-white rounded-md shadow-[0px_1px_6px_rgba(0,0,0,0.1)] bg-blue-500 border-none outline-none hover:opacity-70 focus:opacity-70">
               {!isLoading ? (
                 "Sign In"
               ) : (
