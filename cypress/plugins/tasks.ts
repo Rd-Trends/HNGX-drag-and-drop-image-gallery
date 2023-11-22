@@ -12,10 +12,10 @@ export async function getUserSession({
   email: string;
   password: string;
 }) {
-//   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-//   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
-  //   const supabase = createClient(supabaseUrl, supabaseKey);
-  const supabase = createClientComponentClient();
+  const supabaseUrl = `https://vwaxrdibijdprvuysfxd.supabase.co`;
+  const supabaseKey = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3YXhyZGliaWpkcHJ2dXlzZnhkIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTI5ODQwMDEsImV4cCI6MjAwODU2MDAwMX0.OGD7_fQXbVixgUKpxsIrHRhXGOD4vsULGsm_DgKha7k`;
+  const supabase = createClient(supabaseUrl, supabaseKey);
+  // const supabase = createClientComponentClient();
 
   // Create a session for the user if it doesn't exist already.
   // You can then log in as any number of test users from your tests.
@@ -25,5 +25,5 @@ export async function getUserSession({
     password,
   });
 
-  return { session: res.data.session as Session};
+  return { session: res.data.session as Session };
 }
