@@ -13,6 +13,7 @@ Cypress.Commands.add("loginCustomer", () => {
     password,
     // @ts-ignore
   }).then(({ session }) => {
+    cy.log("user_id", session?.user?.id);
     cy.setCookie(cokieName, JSON.stringify(session));
     cy.visit("/");
   });
