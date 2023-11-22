@@ -5,20 +5,10 @@ Cypress.Commands.add("getByTestId", (selector, ...args) => {
 });
 
 Cypress.Commands.add("loginCustomer", () => {
-  const cokieName = `sb-${Cypress.env("TEST_SUPABASE_PROJECT_ID")}-auth-token`;
-  const email = Cypress.env(`TEST_USER_EMAIL`);
-  const password = Cypress.env(`TEST_USER_PASSWORD`);
-  cy.task("getUserSession", {
-    email,
-    password,
-    // @ts-ignore
-  }).then(({ session }) => {
-    cy.log("user_id", session?.user?.id);
-    cy.setCookie(cokieName, JSON.stringify(session));
-    cy.visit("/");
-  });
-
-  // cy.fetchProfile(Cypress.env(`TEST_USER_EMAIL`));
+  cy.visit("/login");
+  cy.getByTestId("login-email").type(Cypress.env("TEST_USER_EMAIL"));
+  cy.getByTestId("login-password").type(Cypress.env("TEST_USER_PASSWORD"));
+  cy.getByTestId("login-submit").click();
 });
 
 import "@testing-library/cypress/add-commands";

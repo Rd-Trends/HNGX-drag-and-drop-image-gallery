@@ -1,6 +1,5 @@
 import { defineConfig } from "cypress";
 import dotenv from "dotenv";
-import tasks from "./cypress/plugins";
 
 dotenv.config({ path: ".env.local" });
 dotenv.config();
@@ -8,9 +7,7 @@ dotenv.config();
 export default defineConfig({
   e2e: {
     baseUrl: "http://localhost:3000",
-    setupNodeEvents(on, config) {
-      tasks(on, config);
-    },
+    setupNodeEvents(on, config) {},
   },
   env: {
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
